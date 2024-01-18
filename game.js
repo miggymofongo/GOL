@@ -1,8 +1,14 @@
-// we declare a function createGrid that randomly initialize the cells to either zero or 
-// one to form the 'grid', a 2D array with width and height dimensions. createGrid 
-// returns a grid, to which we assigned a new Array function 
-// that takes in a height and iterates over each value of i until the height that we 
-// give it.
+// waddup!! this is a game of life simulation that can be ran in the terminal
+// with the nodejs runtime. just run node game.js and watch the funny
+// looking shapes. 
+//
+//
+//
+//
+// we declare a function createGrid that takes in width and height dimensions and 
+// randomly initialize the cells to either zero or one and returns the 'grid', a 
+// 2D array. createGrid uses a for loop to iterates over each value of i until 
+// the value of height that we give it when we call startGame at the bottom.
 
 function createGrid(width, height) {
     let grid = new Array(height);
@@ -11,6 +17,7 @@ function createGrid(width, height) {
     }
     return grid;
 }
+
 
 
 //
@@ -72,15 +79,10 @@ function getAliveNeighbors(grid, x, y) {
 // the 4 rules that dictate the evolution of cells from one generation to the next are
 // translated into a function updateGrid, which takes in the array 'grid' and returns the 
 // 'next generation' in the form of a variable newGrid that is returned after a calling the 
-// the .map method on the updated grid, creating a new array that is used in the start game function. 
-// The following nested for loop iterates over each cell, returning either a 0 or 1 based 
-// on its value that checks 
-// 
-// 
-// 
-// in the nested for loop there is a conditional that checks to see if the value of
-// aliveNeighbors, is less than 2 (rule number #1 underpopulation) or greater than 3 (rule 
-// number 3 overpopulation) and returns a newGrid with.
+// the .map method on the updated grid, creating a new array. 
+// the nested for loop iterates over each cell, returning either a 0 or 1 based 
+// on value of aliveNeighbors. if it is less than 2 (rule number #1 underpopulation) or 
+// greater than 3 (rule number 3 overpopulation) and returns a newGrid.
 // rule 2 is implicit since it's not changing state unless it has either 2 or 3 aliveNeighbors.
 // aliveNeighbors is declared as a constant created by resolving a function getAliveNeighbors
 // that takes in grid, i, and j (the cell's coordinates).    
