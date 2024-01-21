@@ -1,17 +1,20 @@
-/**  waddup!! this is a game of life simulation comprised of 5 functionss 
- that can be ran in the terminal
- with the nodejs runtime. just run node game.js and watch the funny
- looking shapes. 
-
-
-
-
- we declare a function createGrid that takes in width and height dimensions and 
- returns a new 2D Array called grid with length (height), representing the
- number of rows in the grid. it uses a for loop
- to randomly initialize each cell ' i ' to either zero or one (alive or dead.)
+/**  waddup!! this is a game of life simulation comprised of 5 functions
+ that can be ran in the terminal with the nodejs runtime. 
  
-  The for loop iterates over each value of i and increments it until the value of
+ just run node game.js and watch the funny
+ looking shapes change form every 1000 milliseconds.
+
+
+
+
+the first function we declare, createGrid, takes in width and height dimensions and 
+ returns a new 2D Array called grid with length (height), representing the
+ number of rows in the grid. 
+ it uses a for loop to randomly initialize each cell ' i ' to either zero 
+ or one (alive or dead.)
+
+ 
+The for loop iterates over each value of i and increments it until the value of
  the height dimension that we give it when we call startGame at the bottom.
  
  i call the .fill and .map methods on the new Array, randomly filling it with
@@ -29,15 +32,16 @@ function createGrid(width, height) {
 
 
 /** 
-here grid is fed in as a parameter to a function drawGrid that console.logs
- the grid onto the terminal. 
- the "forEach" method called on the Array 'grid' from the code above iterates 
- over each element "row" of the Array 'grid', console.logging a block or space to 
- visualize the grid on the terminal. 1 is represented by a block character '█' and 0 
- is represented by a space. 
- .map method is called on each row to create a new array and .join concatenates (or mushes
- together) each element in the array (in this case each row) and returns a new string (which
- is just a ' ' or '█'character. )
+here the grid returned from createGrid is fed in as a parameter to a function 
+drawGrid that console.logs the grid onto the terminal. 
+
+the "forEach" method called on the Array 'grid' from the code above iterates 
+over each element "row" of the Array 'grid', console.logging a block or space to 
+visualize the grid on the terminal. 1 is represented by a block character '█' and 0 
+is represented by a space. 
+.map method is called on each row to create a new array and .join concatenates (or mushes
+together) each element in the array (in this case each row) and returns a new string (which
+is just a ' ' or '█'character. )
  
 */  
 
@@ -114,9 +118,9 @@ function updateGrid(grid) {
 
 /**
  this function starts the game by taking in variables width, height, and delay and
- returning a grid, the genesis or first generation of the game of life simulation.
+ returning a grid, the genesis or 'first generation' of the game of life simulation.
 
- setInterval is a global method that will take 
+ setInterval is a global method that will use the drawGrid and updateGrid functions 
 
 */
 
@@ -129,6 +133,9 @@ function startGame(width, height, delay) {
     }, delay);
 }
 
-// Start the game with a grid of 20x20 and update every second
+/**  Start the game with a grid of 20x20 and update every 1000 miliseconds 
+ * 
+ * 
+*/
 startGame(20, 20, 1000);
 
