@@ -17,8 +17,11 @@ the first function we declare, createGrid, takes in width and height dimensions 
 The for loop iterates over each value of i and increments it until the value of
  the height dimension that we give it when we call startGame at the bottom.
  
- i call the .fill and .map methods on the new Array, randomly filling it with
- either a zero or a one. */
+ i call the .fill and .map methods on the new Array, filling it with
+ either a zero or a one with the expression 'Math.floor(Math.random() * 2). 
+ 
+
+ */
  
 
 function createGrid(width, height) {
