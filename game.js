@@ -5,9 +5,47 @@
  looking shapes change form every 1000 milliseconds.
 
 
+*/
+
+/**  first i am going to import the readLine module from node.js to help me 
+provide interactivity 
+*/
+const readline = require('readline');
+const { start } = require('repl');
+const { create } = require('domain');
 
 
-the first function we declare, createGrid, takes in width and height dimensions and 
+/**
+ * here i declare rl, a readline interface to handle the input
+ * and output stream s
+ * 
+ */
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+/**
+ * 
+ * i call the question method on rl, 
+ * 
+ */
+
+rl.question('what grid size do you want (e.g., 20x20)?', (answer) => {
+    let dimensions = answer.split('x').map(num => parseInt(num, 10));
+    if (dimensions.length === 2 && dimensions.every(num => !isNaN(num) && num > 0)) {
+        startGame(dimensions[0], dimensions[1], 1000);
+    } else {
+        console.log('Invalid input. use the format widthxheight.');
+        process.exit(1);
+    }
+
+    rl.close();
+})
+
+
+/** the next function we declare, createGrid, takes in width and height dimensions and 
  returns a new 2D Array called grid with length (height), representing the
  number of rows in the grid. 
  it uses a for loop to randomly initialize each cell ' i ' to either zero 
@@ -19,7 +57,6 @@ The for loop iterates over each value of i and increments it until the value of
  
  i call the .fill and .map methods on the new Array, filling it with
  either a zero or a one with the expression 'Math.floor(Math.random() * 2). 
- 
 
  */
  
@@ -35,16 +72,16 @@ function createGrid(width, height) {
 
 
 /** 
-here the grid returned from createGrid is fed in as a parameter to a function 
+here i feed the grid returned from createGrid as a parameter to a function 
 drawGrid that console.logs the grid onto the terminal. 
 
 the "forEach" method called on the Array 'grid' from the code above iterates 
 over each element "row" of the Array 'grid', console.logging a block or space to 
 visualize the grid on the terminal. 1 is represented by a block character '█' and 0 
 is represented by a space. 
-.map method is called on each row to create a new array and .join concatenates (or mushes
-together) each element in the array (in this case each row) and returns a new string (which
-is just a ' ' or '█'character. )
+.map method is called on each row to create a new array and .join concatenates (or 
+mushes together) each element in the array (in this case each row) and returns a 
+new string (which with a ' ' or '█'character. ) 
  
 */  
 
@@ -130,15 +167,83 @@ function updateGrid(grid) {
 function startGame(width, height, delay) {
     let grid = createGrid(width, height);
     setInterval(() => {
-        console.clear();
-        drawGrid(grid);
-        grid = updateGrid(grid);
+        if (gameState === 'running') {
+            console.clear();
+            drawGrid(grid);
+            grid = updateGrid(grid);     
+        }
+        
     }, delay);
 }
+
+/**
+ * here i am starting to add interactivity into the program with 
+ * a pauseGame function that checks to see if gameState is equal to 
+ * paused or not.
+ * 
+ */
+
+
+
+readline.emitKeypressEvents(process.stdin);
+
+
+process.stdin.setRawMode(true);
+
+
+let gameState = 'running'
+
+function pauseGame() {
+    if (gameState !== 'paused') {
+        gameState = 'paused';
+        console.log
+    }
+}
+
+function resumeGame() {
+    if (gameState === 'paused') {
+        gameState = 'running';
+        console.log('Game resumed');
+    }
+
+}
+
+function resetGame() {
+    gameState = 'reset';
+    console.log('Game Reset');
+    grid = createGrid(grid.length, grid[0].length);
+    gameState = 'running'
+
+
+}
+
+
+process.stdin.on('keypress', (str, key) => {
+    if (key.ctrl && key.name === 'c') {
+        process.exit(); // Exit program
+    } else if (key.name === 'p') {
+        pauseGame();
+    } else if (key.name === 'r') {
+        resumeGame();
+    } else if (key.name === 'w') {
+        resetGame();
+    }
+});
+
+
+
 
 /**  Start the game with a grid of 20x20 and update every 1000 miliseconds 
  * 
  * 
 */
-startGame(20, 20, 1000);
+
+
+
+
+
+
+
+
+// startGame(20, 20, 1000);
 
