@@ -8,7 +8,8 @@
 */
 
 /**  first i am going to import the readLine module from node.js to help me 
-provide interactivity 
+provide interactivity. i declare a const readLine that handles the input 
+ and output streams of the interface created by readLine
 */
 const readline = require('readline');
 const { start } = require('repl');
@@ -16,10 +17,14 @@ const { create } = require('domain');
 
 
 /**
- * here i declare rl, a readline interface to handle the input
- * and output stream s
+ * here i call the createInterface method on readLine and set it to
+ * a const 'rl' that handles the input and output streams of the 
+ * interface created by readLine.
+ * 
+ * 
  * 
  */
+
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -28,7 +33,20 @@ const rl = readline.createInterface({
 
 /**
  * 
- * i call the question method on rl, 
+ * i call the question method on rl that displays the question given to
+ * it as a parameter on the terminal to the output. i declare a block 
+ * scoped variable dimensions with let that
+ * takes in the dimension and use the .split and .map methods to 
+ * divide the string with an x.
+ * 
+ * the if statement that follows checks to see if the input is in the
+ * right format. it checks if the dimension length = 2 (length and width)
+ * and if its greater than zero. if those conditions are met, it 
+ * hits startGame with the dimensions and a one second delay.
+ * 
+ * 
+ * 
+ * the interface constructor instance ends once i call close on rl. 
  * 
  */
 
