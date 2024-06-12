@@ -11,18 +11,7 @@ function make2DArray(cols, rows) {
   return arr;
 }
 
-function mousePressed() {
 
-    userStartAudio();
-
-    if (!isPlaying) {
-      song.play();
-      isPlaying = true;
-    } else {
-      song.stop();
-      isPlaying = false;
-    }  
-};
 
 let grid;
 let cols;
@@ -33,8 +22,22 @@ function setup() {
  createCanvas(600, 400);
  
  song = loadSound("sneaky.mp3", loaded);
+ const playButton = document.getElementById('playButton');
+ playButton.addEventListener('click', toggleMusic);
  slider = createSlider(0, 1, 0.5, 0.01);
  
+ function toggleMusic() {
+  if (!isPlaying) {
+    song.play();
+    isPlaying = true;
+    playButton.textContent = "Pause Music";
+  } else {
+    song.stop();
+    isPlaying = false;
+    playButton.textContent = "Play Music";
+  }  
+};
+
  cols = width / resolution;
  rows = height / resolution;
 
